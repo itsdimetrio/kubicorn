@@ -16,15 +16,16 @@ package retry
 
 import (
 	"os"
-	"github.com/kris-nova/kubicorn/cutil/signals"
 	"time"
+
+	"github.com/kris-nova/kubicorn/cutil/signals"
 )
 
 func Retry(f func(), retries int, timeout time.Duration) {
 	done := make(chan bool, 1)
 
 loop:
-	for i := 0; i < retries; i++ {		
+	for i := 0; i < retries; i++ {
 		if signals.GetSignalState() != 0 {
 			os.Exit(1)
 		}
@@ -33,10 +34,10 @@ loop:
 			done <- true
 		}()
 		select {
-			case <-done:
-				break loop
-			case <-time.After(timeout):
-				break loop
+		case <-done:
+			break loop
+		case <-time.After(timeout):
+			break loop
 		}
 	}
 }
