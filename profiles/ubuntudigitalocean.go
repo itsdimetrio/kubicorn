@@ -21,7 +21,7 @@ import (
 	"github.com/kris-nova/kubicorn/cutil/kubeadm"
 )
 
-func NewSimpleDigitalOceanCluster(name string) *cluster.Cluster {
+func NewUbuntuDigitalOceanCluster(name string) *cluster.Cluster {
 	return &cluster.Cluster{
 		Name:     name,
 		Cloud:    cluster.CloudDigitalOcean,
